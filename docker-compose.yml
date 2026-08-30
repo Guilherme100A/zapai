@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zapai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zapai
+      POSTGRES_PASSWORD: zapai
+      POSTGRES_DB: zapai
+    ports:
+      # porta propria (55432) para nao colidir com nenhum postgres ja rodando na maquina
+      - "55432:5432"
+    volumes:
+      - zapai_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zapai -d zapai"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  zapai_pgdata:
+    name: zapai_pgdata

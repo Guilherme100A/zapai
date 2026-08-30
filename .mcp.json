@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "zapai-playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--browser", "chrome"]
+    },
+    "zapai-postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgres://zapai:zapai@localhost:55432/zapai"
+      ]
+    }
+  }
+}

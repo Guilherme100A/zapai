@@ -1,0 +1,6 @@
+{
+  "disabledMcpjsonServers": [
+    "zapai-playwright",
+    "zapai-postgres"
+  ]
+}

@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Paleta e formas do Leona (app.leonasolutions.io), tiradas dos frames em
+ * media/: fundo cinza-lavanda bem claro, superficies brancas, borda quase
+ * invisivel, roxo como cor de marca e verde como cor de "ligado".
+ *
+ * Reaproveitar o desenho e proposital: quem aprendeu o Leona nao precisa
+ * reaprender nada aqui.
+ */
+:root {
+  --bg: #f6f6fa;
+  --surface: #ffffff;
+  /* fundo dos blocos de secao dentro dos modais */
+  --surface-2: #fafafc;
+  --border: #ececf1;
+  --fg: #1a1a24;
+  --muted: #767689;
+  --brand: #7c3aed;
+  /* verde dos toggles e dos avisos de sucesso */
+  --ok: #22c55e;
+  --shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 1px 3px rgb(16 24 40 / 4%);
+  --shadow-lg: 0 12px 32px rgb(16 24 40 / 12%), 0 2px 8px rgb(16 24 40 / 6%);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1016;
+    --surface: #161923;
+    --surface-2: #1b1f2b;
+    --border: #262b38;
+    --fg: #e9ecf4;
+    --muted: #8b93a7;
+    --brand: #9d85ff;
+    --ok: #34d399;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+    --shadow-lg: 0 12px 32px rgb(0 0 0 / 50%);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e1016;
+  --surface: #161923;
+  --surface-2: #1b1f2b;
+  --border: #262b38;
+  --fg: #e9ecf4;
+  --muted: #8b93a7;
+  --brand: #9d85ff;
+  --ok: #34d399;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 50%);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-surface;
+    box-shadow: var(--shadow);
+  }
+  /* Bloco cinza de secao dentro dos modais, como no "Editar Bloco de IA". */
+  .section {
+    @apply rounded-xl border border-border p-3.5;
+    background: var(--surface-2);
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2
+           text-sm font-medium transition hover:bg-black/[0.03] disabled:opacity-50
+           dark:hover:bg-white/[0.04];
+    box-shadow: var(--shadow);
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white
+           transition hover:opacity-90 disabled:opacity-50;
+    background: var(--brand);
+    box-shadow: var(--shadow);
+  }
+  .input {
+    @apply w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none
+           transition focus:border-[var(--brand)];
+  }
+  .input:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 14%, transparent);
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold;
+  }
+  /* Texto de ajuda embaixo do campo, como no Leona. */
+  .hint {
+    @apply mt-1.5 block text-[11px] leading-relaxed text-muted;
+  }
+}
+
+/* ------------------------------------------------------- React Flow ----- */
+
+.react-flow__attribution { display: none; }
+
+/* Edges tracejadas, iguais as do canvas do Leona. */
+.react-flow__edge-path {
+  stroke: color-mix(in srgb, var(--muted) 55%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--brand);
+}
+
+.react-flow__handle {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--surface);
+}
+
+/* Controles: pilha vertical de botoes redondos no canto inferior esquerdo. */
+.react-flow__controls {
+  box-shadow: none;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.react-flow__controls-button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+}
+.react-flow__controls-button:hover {
+  background: color-mix(in srgb, var(--brand) 8%, var(--surface));
+  color: var(--brand);
+}
+.react-flow__controls-button svg { fill: currentColor; }
+
+.react-flow__minimap {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}

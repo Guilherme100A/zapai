@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+
+# Segredos: o .env tem as chaves de IA de verdade — nunca versionar.
+# Use o .env.example como modelo.
+.env
+.env.local
+
+# Credenciais do WhatsApp (Baileys). Sao equivalentes a uma sessao logada.
+.wa-sessions
+
+# Artefatos dos videos do Leona (mp4/wav/frames) e binarios usados para extrair.
+media
+.tools
+
+# Locais
+*.log
+tsconfig.tsbuildinfo
+.playwright-mcp
+drizzle/meta
+.DS_Store
